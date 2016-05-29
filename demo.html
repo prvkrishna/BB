@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Bouncing Ball</title>
+<style>
+#mycanvas {
+	display: block;
+	border: 5px solid green;
+	margin: 50px auto;
+}
+  
+</style>
+</head>
+<body>
+<canvas id="mycanvas"></canvas>   
+<div id="data" style="position:absolute;top:20%;left:5%;">         
+       <input type="button" value=Add onclick="addBall()">     
+       <input type="button" value=remove onclick="removeBall()">  <br/> <br/> <br/> 
+       <input id="play"   type="button" value=Play  onclick="play()">  
+       <input id="pause"  type="button" value=Pause onclick="pause()">
+       <br/> <br/> <br/>
+      
+       <input type="range" id="range" min="10" max="50" value="0" step="10" onchange="showValue(this.value)" />       
+</div>
+   
+<script src="ball.js"></script>
+</body>
+</html>
