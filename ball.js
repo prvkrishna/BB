@@ -4,7 +4,10 @@ var w=500,h=500;
 //canvas styles
 mycanvas.height=h;
 mycanvas.width=w;
+var ball_pos = [mycanvas.width / 2, mycanvas.height / 2];;
+var counter=0;
 var sliderSpeed=50;
+var i = setInterval( update, sliderSpeed );
 var sliderAction=0;
 document.getElementById("play").style.display='none';
 document.getElementById("pause").style.display='none';
@@ -21,6 +24,7 @@ function Ball(x,y,r,c,vx,vy){
   this.vy=vy;
   this.update=function(){
         ctx.beginPath();
+        ctx.lineWidth = 1;       
 		ctx.arc(this.x, this.y, this.r, 0, Math.PI*2, false);
 		ctx.fillStyle = this.c;
 		ctx.fill();
@@ -29,31 +33,66 @@ function Ball(x,y,r,c,vx,vy){
         this.y += this.vy;
         if(this.y>=(w-10)||this.y<=10){
         this.vy=-this.vy;
+            counter+=1
+           setCounter(counter)
          }
         if(this.x>=(h-10)||this.x<=10){
         this.vx=-this.vx;
+            counter+=1
+            setCounter(counter)
          }
 
 }
 }
-
+function setCounter(counter){
+ document.getElementById("counterValue").innerHTML="<b>"+counter+"</b>";
+}
+ function setCount(){
+  counter=0;
+  document.getElementById("counterValue").innerHTML="<b>"+counter+"</b>";     
+ }
+setInterval(setCount,1000);
 //clearing canvas
 function clearCanvas(){
 ctx.clearRect(0, 0, w, h);
 }
+
+ function click(evt) {
+    var bound = mycanvas.getBoundingClientRect();     
+    ball_pos[0] = evt.clientX - bound.left;
+    ball_pos[1] = evt.clientY - bound.top;
+   // alert(ball_pos[0]+", "+ball_pos[1])
+ }
+
 
 var color = ["red","blue","yellow","black","green","Cyan","Navy","violet","maroon","olive"];
 var count=0;//counting balls
 //adding balls
 function addBall(){
     if( sliderAction==0){
-  var rndColor=Math.floor((Math.random() * 9) + 1);
-  var rndX=Math.floor((Math.random() * 8) + 1);
-  var rndY=Math.floor((Math.random() * 8) + 1);
-  ball[count]= new Ball(Math.floor((Math.random() * 490) + 1),Math.floor((Math.random() * 490)+1),Math.floor((Math.random() * 10) + 5),color[rndColor],rndX,rndY);
-  count++; 
-  document.getElementById("pause").style.display='block'; 
-  //document.getElementById("range").style.display='block'; 
+      clearInterval( i );
+      i = setInterval(update,sliderSpeed);
+      var rndColor=Math.floor((Math.random() * 9) + 1);
+      var rndX=Math.floor((Math.random() * 8) + 1);
+      var rndY=Math.floor((Math.random() * 8) + 1);
+        window.onclick = click;
+      ball[count]= new Ball(ball_pos[0],ball_pos[1],Math.floor((Math.random() * 10) + 5),color[rndColor],rndX,rndY);
+      count++; 
+      document.getElementById("pause").style.display='block'; 
+      //document.getElementById("range").style.display='block'; 
+    }
+}
+function addBallOnClick(){
+    if( sliderAction==0){
+      clearInterval( i );
+      i = setInterval(update,sliderSpeed);
+      var rndColor=Math.floor((Math.random() * 9) + 1);
+      var rndX=Math.floor((Math.random() * 8) + 1);
+      var rndY=Math.floor((Math.random() * 8) + 1);
+      ball[count]= new Ball(Math.floor((Math.random() * 490) + 1),Math.floor((Math.random() * 490) + 1),Math.floor((Math.random() * 10) + 5),color[rndColor],rndX,rndY);
+      count++; 
+      document.getElementById("pause").style.display='block'; 
+      //document.getElementById("range").style.display='block'; 
     }
 }
 function removeBall(){
@@ -117,7 +156,7 @@ function update(){
 }
 }
     
-var i = setInterval( update, sliderSpeed );
+
  
 
 

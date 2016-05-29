@@ -3,20 +3,25 @@
 <title>Bouncing Ball</title>
 <style>
 #mycanvas {
+    position: absolute;
+    left: 25%;
 	display: block;
 	border: 5px solid green;
-	margin: 50px auto;
+	margin: 50px;
 }
   
 </style>
 </head>
 <body>
-<canvas id="mycanvas"></canvas>   
+    
+  <canvas id="mycanvas" onclick="addBall()"></canvas>   
 <div id="data" style="position:absolute;top:20%;left:5%;">         
-       <input type="button" value=Add onclick="addBall()">     
+       <input type="button" value=Add onclick="addBallOnClick()">     
        <input type="button" value=remove onclick="removeBall()">  <br/> <br/> <br/> 
        <input id="play"   type="button" value=Play  onclick="play()">  
        <input id="pause"  type="button" value=Pause onclick="pause()">
+       <b>CountInSeconds : </b>
+       <span id="counterValue"><b>0</b></span> 
        <br/> <br/> <br/>
       
        <input type="range" id="range" min="10" max="50" value="0" step="10" onchange="showValue(this.value)" />       
