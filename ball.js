@@ -8,7 +8,7 @@ var sliderSpeed=50;
 var sliderAction=0;
 document.getElementById("play").style.display='none';
 document.getElementById("pause").style.display='none';
-document.getElementById("range").style.display='none';  
+//document.getElementById("range").style.display='none';  
 //balls array
 var ball=[];
 //Class for creating ball
@@ -53,7 +53,7 @@ function addBall(){
   ball[count]= new Ball(Math.floor((Math.random() * 490) + 1),Math.floor((Math.random() * 490)+1),Math.floor((Math.random() * 10) + 5),color[rndColor],rndX,rndY);
   count++; 
   document.getElementById("pause").style.display='block'; 
-  document.getElementById("range").style.display='block'; 
+  //document.getElementById("range").style.display='block'; 
     }
 }
 function removeBall(){
@@ -67,7 +67,7 @@ function removeBall(){
  if(count<=0){
     document.getElementById("pause").style.display='none'; 
     document.getElementById("play").style.display='none'; 
-    document.getElementById("range").style.display='none';  
+    //document.getElementById("range").style.display='none';  
     sliderAction=0 
     clearInterval( i );
     i = setInterval(update,sliderSpeed); 
